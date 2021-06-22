@@ -65,6 +65,9 @@ contract GammaAdapter is IProtocolAdapter, DSMath {
     // 0x proxy for performing buys
     address public immutable ZERO_EX_EXCHANGE_V3;
 
+    // leverage vault type
+    const levVaultType = web3.eth.abi.encodeParameter('uint256', 1)
+
     /**
      * @notice Constructor for the GammaAdapter which initializes a variables
      * @param _oTokenFactory is the Gamma protocol factory contract which spawns otokens
@@ -501,7 +504,7 @@ contract GammaAdapter is IProtocolAdapter, DSMath {
             newVaultID, // vaultId
             0, // amount
             0, //index
-            "" //data
+            levVaultType //data
         );
 
         actions[1] = IController.ActionArgs(
